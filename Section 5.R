@@ -105,3 +105,6 @@ MSEh3<- predh3 %>% group_by(Run) %>%
 mean(MSEh1$MSE)
 mean(MSEh2$MSE)
 mean(MSEh3$MSE)
+
+
+
