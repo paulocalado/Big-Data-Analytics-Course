@@ -30,4 +30,16 @@ ggplot(delay, aes(dist, delay)) +
   geom_point(aes(size = count), alpha = 1/2) +
   geom_smooth() +
   scale_size_area(max_size = 2)
-s
+
+flights_tbl
+
+flights_tbl%>%
+  ft_binarizer("distance","long_flight",threshold =1500)%>%
+  select(distance,long_flight)%>%
+  collect()%>%
+  mutate(long_flight2 = ifelse(long_flight== 0,"short","long"))
+
+flights_tbl%>%
+  ft_bucketizer("distance","distance_cat",
+                splits = c(0,500,1500,Inf))%>%
+  select(distance, distance_cat)
